@@ -1,86 +1,73 @@
 const sayfalar = document.querySelectorAll(".sayfa");
-const buyukKalp = document.getElementById("buyukKalp");
+const kalp = document.getElementById("buyukKalp");
 const sarki = document.getElementById("arkaplanSarki");
+const yazi = document.getElementById("yazi");
 const efektler = document.getElementById("efektler");
 
-let aktifIndex = 0;
+let index = 0;
 
-// Kalbe tıklama
-buyukKalp.addEventListener("click", () => {
-    titresim(200);
-    sarki.play().catch(() => {});
-    adimlariBaslat();
+kalp.addEventListener("click", () => {
+    titre(200);
+    sarki.play().catch(()=>{});
+    ilerle();
 });
 
-// Adımları sırayla göster
-function adimlariBaslat() {
+function ilerle() {
     const sure = 2000;
 
     for (let i = 1; i < sayfalar.length; i++) {
         setTimeout(() => {
-            titresim(60);
-
-            sayfalar[aktifIndex].classList.remove("aktif");
+            sayfalar[index].classList.remove("aktif");
             sayfalar[i].classList.add("aktif");
-            aktifIndex = i;
+            index = i;
 
-            // Final
-            if (i === sayfalar.length - 1) {
-                titresim([120, 60, 120, 60, 200]);
-                baslatEfektler();
+            if (sayfalar[i].classList.contains("final")) {
+                finalBaslat();
             }
-        }, sure * i);
+        }, i * sure);
     }
 }
 
-// Final efektleri
-function baslatEfektler() {
-    const w = window.innerWidth;
+function finalBaslat() {
+    yaziyiYaz("Seni seviyorum Kübra ❤️");
+    ayiciklar();
+    setInterval(pariltiUret, 250);
+}
 
-    // ALTTA DANS EDEN AYICIKLAR + MİNİK KALP
+function yaziyiYaz(metin) {
+    yazi.textContent = "";
+    let i = 0;
+    const int = setInterval(() => {
+        yazi.textContent += metin[i];
+        titre(15);
+        i++;
+        if (i >= metin.length) clearInterval(int);
+    }, 120);
+}
+
+function ayiciklar() {
     for (let i = 0; i < 4; i++) {
-        const wrapper = document.createElement("div");
-        wrapper.className = "ayicik-wrapper";
-
-        const kalp = document.createElement("div");
-        kalp.className = "minikKalp";
-        kalp.textContent = "❤️";
-
-        const ayicik = document.createElement("img");
-        ayicik.src = "images/dans_ayicik.gif";
-        ayicik.className = "ayicik";
-
-        wrapper.appendChild(kalp);
-        wrapper.appendChild(ayicik);
-
-        wrapper.style.left = (15 + i * 20) + "%";
-        wrapper.style.bottom = "20px";
-
-        efektler.appendChild(wrapper);
+        const w = document.createElement("div");
+        w.className = "ayicik-wrapper";
+        w.style.left = (15 + i * 20) + "%";
+        w.innerHTML = `
+            <div class="minikKalp">❤️</div>
+            <img src="images/dans_ayicik.gif" class="ayicik">
+        `;
+        efektler.appendChild(w);
     }
-
-    // Uçan kalpler & balonlar
-    setInterval(() => {
-        efektUret("❤️", "kalp");
-        efektUret("🎈", "balon");
-    }, 500);
 }
 
-// Efekt üret
-function efektUret(emoji, sinif) {
-    const e = document.createElement("div");
-    e.className = sinif;
-    e.textContent = emoji;
-    e.style.left = Math.random() * (window.innerWidth - 40) + "px";
-    e.style.bottom = "-40px";
-    efektler.appendChild(e);
-
-    setTimeout(() => e.remove(), 3000);
+function pariltiUret() {
+    const s = document.createElement("div");
+    s.className = "sparkle";
+    s.textContent = "✨";
+    s.style.left = Math.random() * 80 + "%";
+    s.style.top = Math.random() * 80 + "%";
+    yazi.appendChild(s);
+    setTimeout(() => s.remove(), 1500);
 }
 
-// Mobil titreşim
-function titresim(sure) {
-    if ("vibrate" in navigator) {
-        navigator.vibrate(sure);
-    }
+function titre(ms) {
+    if (navigator.vibrate) navigator.vibrate(ms);
 }
