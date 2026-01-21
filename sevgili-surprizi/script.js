@@ -6,48 +6,7 @@ const adim4 = document.getElementById("adim4");
 const buyukKalp = document.getElementById("buyukKalp");
 const efektlerDiv = document.getElementById("efektler");
 const foto = document.getElementById("foto");
-
-
-function baslatEfektler() {
-    const sarki = document.getElementById("arkaplanSarki");
-    sarki.play().catch(() => {
-        console.log("Otomatik çalma engellenmiş olabilir, kullanıcı etkileşimi gerekebilir.");
-    });
-
-    const ekranGenisligi = window.innerWidth;
-    const ekranYuksekligi = window.innerHeight;
-
-    // Dans eden ayıcıklar
-    for (let i = 0; i < 5; i++) {
-        const ayicik = document.createElement("img");
-        ayicik.src = "images/dans_ayicik.gif";
-        ayicik.style.left = Math.random() * (ekranGenisligi - 100) + "px";
-        ayicik.style.top = Math.random() * (ekranYuksekligi / 2) + 50 + "px";
-        efektlerDiv.appendChild(ayicik);
-    }
-
-    // Uçan kalpler ve balonlar
-    setInterval(() => {
-        const kalp = document.createElement("div");
-        kalp.classList.add("kalp");
-        kalp.style.left = Math.random() * (ekranGenisligi - 30) + "px";
-        kalp.style.top = ekranYuksekligi + "px";
-        kalp.textContent = "❤️";
-        efektlerDiv.appendChild(kalp);
-
-        const balon = document.createElement("div");
-        balon.classList.add("balon");
-        balon.style.left = Math.random() * (ekranGenisligi - 30) + "px";
-        balon.style.top = ekranYuksekligi + "px";
-        balon.textContent = "🎈";
-        efektlerDiv.appendChild(balon);
-
-        setTimeout(() => {
-            kalp.remove();
-            balon.remove();
-        }, 2000);
-    }, 500);
-}
+const sarki = document.getElementById("arkaplanSarki");
 
 buyukKalp.addEventListener("click", () => {
     // Adım1 gizle, Adım2 göster
@@ -69,6 +28,11 @@ buyukKalp.addEventListener("click", () => {
 });
 
 function baslatEfektler() {
+    // Müziği başlat
+    sarki.play().catch(() => {
+        console.log("Otomatik çalma engellenmiş olabilir, kullanıcı etkileşimi gerekebilir.");
+    });
+
     const ekranGenisligi = window.innerWidth;
     const ekranYuksekligi = window.innerHeight;
 
