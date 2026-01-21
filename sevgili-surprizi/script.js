@@ -2,6 +2,9 @@ const adim1 = document.getElementById("adim1");
 const adim2 = document.getElementById("adim2");
 const adim3 = document.getElementById("adim3");
 const adim4 = document.getElementById("adim4");
+const adim5 = document.getElementById("adim5");
+const adim6 = document.getElementById("adim6");
+const adim7 = document.getElementById("adim7");
 const buyukKalp = document.getElementById("buyukKalp");
 const efektlerDiv = document.getElementById("efektler");
 const sarki = document.getElementById("arkaplanSarki");
@@ -62,3 +65,4 @@ function baslatEfektler() {
         }, 4000); // Balon ve kalp biraz daha uzun süre uçsun
     }, 500);
 }
+
