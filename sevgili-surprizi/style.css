@@ -3,8 +3,8 @@ html, body {
     margin: 0;
     width: 100%;
     height: 100%;
-    font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #ffe4e1, #ffc0cb);
+    font-family: Arial, sans-serif;
     overflow: hidden;
 }
 
@@ -14,15 +14,17 @@ html, body {
     height: 100%;
 }
 
+/* ===== SAYFALAR ===== */
 .sayfa {
     position: absolute;
-    inset: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
+    opacity: 0;
+    pointer-events: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    opacity: 0;
-    pointer-events: none;
     transition: opacity 1s ease;
 }
 
@@ -31,16 +33,11 @@ html, body {
     pointer-events: auto;
 }
 
-/* ===== BAŞLANGIÇ KALBİ ===== */
+/* ===== KALP ===== */
 #buyukKalp {
     font-size: 120px;
     cursor: pointer;
     animation: kalpAtis 1.5s infinite;
-}
-
-.altYazi {
-    margin-top: 15px;
-    color: #ff1493;
 }
 
 /* ===== SÖZLER ===== */
@@ -49,10 +46,10 @@ html, body {
     color: #ff1493;
     text-align: center;
     padding: 0 20px;
-    animation: fadeUp 1.2s ease;
+    animation: fadeUp 1.5s ease;
 }
 
-/* ===== FINAL FOTO + YAZI ===== */
+/* ===== FINAL FOTO ===== */
 .fotoWrapper {
     position: relative;
     display: inline-block;
@@ -71,10 +68,11 @@ html, body {
     max-width: 80%;
     max-height: 45%;
     border-radius: 22px;
-    box-shadow: 0 12px 45px rgba(255,20,147,0.45);
+    box-shadow: 0 12px 40px rgba(255,20,147,0.45);
     z-index: 0;
 }
 
+/* ===== FOTO ÜSTÜ YAZI ===== */
 .fotoYazi {
     position: absolute;
     top: 50%;
@@ -104,8 +102,8 @@ html, body {
     font-size: 14px;
     color: #ff69b4;
     animation: kalpParla 1.5s ease-out forwards;
-    z-index: 2;
     pointer-events: none;
+    z-index: 2;
 }
 
 /* ===== AYICIKLAR ===== */
@@ -116,7 +114,6 @@ html, body {
     flex-direction: column;
     align-items: center;
     animation: ayicikDans 1.2s infinite alternate;
-    pointer-events: none;
 }
 
 .ayicik {
@@ -128,7 +125,7 @@ html, body {
     animation: kalpAtis 1s infinite;
 }
 
-/* ===== UÇAN EFEKTLER ===== */
+/* ===== UÇAN KALPLER ===== */
 .kalp, .balon {
     position: absolute;
     font-size: 32px;
@@ -136,13 +133,13 @@ html, body {
     pointer-events: none;
 }
 
-/* ===== KALP PATLAMASI ===== */
+/* ===== FOTOYA DOKUNUNCA PATLAMA ===== */
 .kalpPatlama {
     position: absolute;
     font-size: 26px;
     animation: patla 1s ease-out forwards;
-    z-index: 4;
     pointer-events: none;
+    z-index: 4;
 }
 
 /* ===== ANİMASYONLAR ===== */
@@ -166,24 +163,26 @@ html, body {
     to { transform: scale(2.5) translateY(-20px); opacity: 0; }
 }
 
-@keyframes ayicikDans {
-    0% { transform: translateY(0) rotate(-6deg); }
-    50% { transform: translateY(-10px) rotate(6deg); }
-    100% { transform: translateY(0) rotate(-4deg); }
-}
-
 @keyframes uc {
     from { transform: translateY(0); opacity: 1; }
     to { transform: translateY(-400px); opacity: 0; }
 }
 
-@keyframes patla {
-    from { transform: translate(0,0) scale(0.5); opacity: 1; }
-    to { transform: translate(var(--x), var(--y)) scale(1.5); opacity: 0; }
+@keyframes ayicikDans {
+    0% { transform: rotate(-8deg); }
+    50% { transform: translateY(-10px) rotate(8deg); }
+    100% { transform: rotate(-5deg); }
 }
 
-/* ===== MOBİL ===== */
+@keyframes patla {
+    from { transform: scale(0.5); opacity: 1; }
+    to {
+        transform: translate(var(--x), var(--y)) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Mobil */
 @media (max-width: 600px) {
-    .soz { font-size: 24px; }
     .fotoYazi { font-size: 26px; }
 }
