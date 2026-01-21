@@ -2,6 +2,7 @@ const sayfalar = document.querySelectorAll(".sayfa");
 const buyukKalp = document.getElementById("buyukKalp");
 const sarki = document.getElementById("arkaplanSarki");
 const efektler = document.getElementById("efektler");
+const yazi = document.getElementById("yazi"); // 👈 YAZI ALANI
 
 let aktifIndex = 0;
 
@@ -28,6 +29,7 @@ function adimlariBaslat() {
             if (i === sayfalar.length - 1) {
                 titresim([120, 60, 120, 60, 200]);
                 baslatEfektler();
+                yaziyiYaz("Seni seviyorum Kübra ❤️"); // 👈 BURADA
             }
         }, sure * i);
     }
@@ -35,7 +37,6 @@ function adimlariBaslat() {
 
 // Final efektleri
 function baslatEfektler() {
-    const w = window.innerWidth;
 
     // ALTTA DANS EDEN AYICIKLAR + MİNİK KALP
     for (let i = 0; i < 4; i++) {
@@ -64,6 +65,34 @@ function baslatEfektler() {
         efektUret("❤️", "kalp");
         efektUret("🎈", "balon");
     }, 500);
+
+    // ✨ Yazı pırıltısı
+    setInterval(pariltiUret, 250);
+}
+
+// 💌 HARF HARF YAZI
+function yaziyiYaz(metin) {
+    yazi.textContent = "";
+    let i = 0;
+
+    const interval = setInterval(() => {
+        yazi.textContent += metin[i];
+        titresim(15);
+        i++;
+        if (i >= metin.length) clearInterval(interval);
+    }, 120);
+}
+
+// ✨ PIRILTI
+function pariltiUret() {
+    const s = document.createElement("span");
+    s.className = "sparkle";
+    s.textContent = "✨";
+    s.style.left = Math.random() * 90 + "%";
+    s.style.top = Math.random() * 90 + "%";
+    yazi.appendChild(s);
+
+    setTimeout(() => s.remove(), 1500);
 }
 
 // Efekt üret
