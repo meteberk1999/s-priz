@@ -111,7 +111,61 @@ html, body {
     font-size: 34px;
     animation: uc 3.5s ease-out forwards;
 }
+.fotoAlan {
+    position: relative;
+    width: 280px;
+    height: 380px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+/* Mevcut finalFoto'yu override eder */
+#finalFoto {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    object-fit: cover;
+}
+
+/* ===== FOTO ÜSTÜ YAZI ===== */
+#yazi {
+    position: absolute;
+    bottom: 18px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 28px;
+    color: #ffffff;
+    letter-spacing: 2px;
+    z-index: 10;
+    pointer-events: none;
+    text-shadow:
+        0 0 6px #ff69b4,
+        0 0 12px #ff1493,
+        0 0 20px rgba(255,20,147,0.9);
+}
+
+/* ===== YAZI PIRILTISI ===== */
+.sparkle {
+    position: absolute;
+    font-size: 14px;
+    pointer-events: none;
+    animation: parilti 1.5s ease-out forwards;
+}
+
+/* ===== PIRILTI ANİMASYONU ===== */
+@keyframes parilti {
+    from {
+        opacity: 1;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
 /* ===== Animasyonlar ===== */
 @keyframes kalpAtis {
     0%,100% { transform: scale(1); }
@@ -148,3 +202,4 @@ html, body {
     50% { transform: translateY(-10px) rotate(8deg); }
     100% { transform: translateY(0) rotate(-5deg); }
 }
+
